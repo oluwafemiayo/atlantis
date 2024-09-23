@@ -1,8 +1,15 @@
+# Atlantis namespace
+resource "kubernetes_namespace" "atlantis" {
+  metadata {
+    name = "atlantis"
+  }
+}
+
+
 # Helm Release for Atlantis
 resource "helm_release" "atlantis" {
   name      = "atlantis"
   namespace = "atlantis"
-
   repository = "https://runatlantis.github.io/helm-charts"
   chart      = "atlantis"
   version    = "5.5.1"
@@ -18,7 +25,7 @@ resource "helm_release" "atlantis" {
       secret: "${var.github_secret}"
      
 
-    orgAllowlist: "github.com/oluwafemiayo/monitoring"
+    orgAllowlist: "github.com/oluwafemiayo/monitoring-stack"
     atlantisUrl: "${var.atlantis_repo_url}"
     YAML
   ]
